@@ -1,0 +1,10 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[user]
+	name = ysyx_22050133-Yu Hang
+	email = 1339236493@qq.com
+[core]
+	editor = vim
+[color]
+	ui = true
