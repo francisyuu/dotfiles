@@ -6,5 +6,8 @@
 	email = 1339236493@qq.com
 [core]
 	editor = vim
+	excludesfile = /home/francisyuu/.gitignore_global
 [color]
 	ui = true
+[alias]
+	ggraph = log --all --graph --decorate --oneline
