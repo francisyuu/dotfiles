@@ -81,21 +81,22 @@ set lazyredraw
 "show typed cmd right bottom
 set showcmd
 
+"already replaced by plugin vim-airline
 "run :so $VIMRUNTIME/syntax/hitest.vim to prview all highlight groups
-set statusline=
-set statusline+=%#PmenuSel#
-set statusline+=%{StatuslineGit()}
-set statusline+=%#LineNr#
-set statusline+=\ %f
-set statusline+=\ %r
-set statusline+=%m
-set statusline+=%=
-set statusline+=%#CursorColumn#
-set statusline+=\ type:%y
-set statusline+=\ format:%{&fileencoding?&fileencoding:&encoding}
-set statusline+=\ %p%%
-set statusline+=\ L%l/%L:C%c
-set statusline+=\ 
+"set statusline=
+"set statusline+=%#PmenuSel#
+"set statusline+=%{StatuslineGit()}
+"set statusline+=%#LineNr#
+"set statusline+=\ %f
+"set statusline+=\ %r
+"set statusline+=%m
+"set statusline+=%=
+"set statusline+=%#CursorColumn#
+"set statusline+=\ type:%y
+"set statusline+=\ format:%{&fileencoding?&fileencoding:&encoding}
+"set statusline+=\ %p%%
+"set statusline+=\ L%l/%L:C%c
+"set statusline+=\ 
 
 "------------------------- Text--------------------------------------------------
 "syntax highlighting
@@ -174,15 +175,15 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h 
 map <C-l> <C-W>l 
 
-"remap go to linestart 1 lineend 0
-nnoremap 1 0
-nnoremap 0 $
 "remap go to screen top H bottom J
 nnoremap J L
 nnoremap K H
-"map H=1 L=0
-nmap H 1
-nmap L 0
+"remap go to linestart H lineend L
+nnoremap H 0
+nnoremap L $
+
+nmap dL d$a
+nmap dH d0a
 "let space be <leader>
 let mapleader=" " 
 "quick save and quick quit
@@ -193,9 +194,14 @@ nmap <leader>ss {jV}
 nmap <leader>sa ggVG
 "quick move between windows
 nmap <leader>j <C-W>j
-nmap <leader>k <C-W>k
+"nmap <leader>k <C-W>k
 nmap <leader>l <C-W>l
-nmap <leader>h <C-W>h
+"nmap <leader>h <C-W>h
+
+nmap <leader>- :new<cr>
+nmap <leader>c :tabnew<cr>
+nmap <leader>n :tabnext<cr>
+
 "------------------------- Overwrite--------------------------------------------------
 
 "Source a global configuration file if available
@@ -207,10 +213,35 @@ endif
 "default plugin directory:'~/.vim/plugged'
 call plug#begin()
 
-Plug 'preservim/nerdtree'
+"-------------interface-----------
 Plug 'tomasr/molokai'
+Plug 'mileszs/ack.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"-------------file tree/search----
+Plug 'preservim/nerdtree'
+Plug 'majutsushi/tagbar'
+Plug 'kien/ctrlp.vim'
+"-------------quick typing-------
+Plug 'easymotion/vim-easymotion'
+Plug 'tpope/vim-surround'
+Plug 'scrooloose/nerdcommenter'
+"Plug 'valloric/youcompleteme'
+Plug 'tpope/vim-repeat'
+"-------------coding support----
+Plug 'w0rp/ale'
+
 
 call plug#end()
+
+set updatetime=200 "quickly check 
+let g:airline_section_c='%f %r %m %='
+let g:airline_section_x='type:%y'
+let g:airline_section_y='&encoding'
+let g:airline_section_z='%p%% L%l/%L:C%c'
+let g:airline_theme='molokai'
 "------------------------- Abbrivations--------------------------------------------------
 :iab abgCl -------------------------str--------------------------------------------------<esc>0fscw
 :iab abgCb //--------------------------------------------------------------------<enter>//str<enter>//--------------------------------------------------------------------<esc>0kfscw
