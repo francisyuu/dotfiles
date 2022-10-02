@@ -122,3 +122,4 @@ export AM_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/abstract-m
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 #chezmoi test
+export NPC_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/npc

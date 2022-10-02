@@ -114,5 +114,9 @@ bindkey '\el' forward-char
 bindkey '\ek' up-line-or-history
 bindkey '\ej' down-line-or-history
 
+LS_COLORS="di=01;94"
+export LS_COLORS
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# ysyx workpath added 
+export NPC_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/npc

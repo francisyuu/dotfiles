@@ -10,4 +10,4 @@
 [color]
 	ui = true
 [alias]
-	ggraph = log --all --graph --decorate --oneline
+	graph = log --all --graph --decorate --oneline
