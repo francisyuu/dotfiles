@@ -105,7 +105,7 @@ syntax on
 "folds bar with width 1 column
 set foldcolumn=1
 "fold method:syntax
-set foldmethod=syntax
+set foldmethod=indent
 "start editing whit all folds not closed
 set foldlevelstart=99
 "set foldenable 
@@ -124,16 +124,18 @@ set backspace=indent,eol,start
 "show matching brackets briefly when inserteing one
 set showmatch
 "show matching time 0.2second
-set matchtime=2
+set matchtime=0
+"let the color of the matching paren seems more comfortable
+hi MatchParen ctermfg=208 ctermbg=bg
 
 "Use spaces instead of tabs except Makefile
 set expandtab
 set smarttab
-set shiftwidth=4
+set shiftwidth=2
 "delete 4 spaces only at the beginning of a line
-set tabstop=4
+set tabstop=2
 "delete 4 spaces everywhere
-set softtabstop=4 
+set softtabstop=2 
 autocmd BufNewFile,BufRead makefile,Makefile set noexpandtab
 
 "copy indent from current line when starting a new line
@@ -145,20 +147,45 @@ filetype indent on
 
 "enable spellchecking
 "set spell
+"set omnifunc=syntaxcomplete#Complete
+"au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
-"------------------------- Keymap-------------------------------------------------
+"------------------------- Ke"ymap-------------------------------------------------
 " Unbind some useless/annoying default key bindings.
-nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
-
-
+"'Q' in normal mode enters Ex mode. You almost never want this.
+"nmap 0 <Nop>
+"nmap $ <Nop>
+noremap A <Nop>
+noremap B <Nop>
+noremap E <Nop>
+noremap F <Nop>
+noremap Q <Nop>
+noremap Y <Nop>
+noremap Z <Nop>
+noremap <C-a> <Nop>
+noremap <C-c> <Nop>
+noremap <C-d> <Nop>
+noremap <C-e> <Nop>
+noremap <C-g> <Nop>
+noremap <C-i> <Nop>
+noremap <C-m> <Nop>
+noremap <C-n> <Nop>
+noremap <C-o> <Nop>
+noremap <C-q> <Nop>
+noremap <C-r> <Nop>
+noremap <C-t> <Nop>
+noremap <C-u> <Nop>
+noremap <C-w> <Nop>
+noremap <C-x> <Nop>
+noremap <C-y> <Nop>
 " Enable mouse support. You should avoid relying on this too much, but it can
 " sometimes be convenient.
-"set mouse+=a
-"
-nnoremap <Left>  :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up>    :echoe "Use k"<CR>
-nnoremap <down>  :echoe "use j"<cr>
+set mouse+=a
+
+"nnoremap <Left>  :echoe "Use h"<CR>
+"nnoremap <Right> :echoe "Use l"<CR>
+"nnoremap <Up>    :echoe "Use k"<CR>
+"nnoremap <down>  :echoe "use j"<cr>
 " ...and in insert mode
 "inoremap <left>  <esc>:echoe "use h"<cr>
 "inoremap <right> <esc>:echoe "use l"<cr>
@@ -166,41 +193,60 @@ nnoremap <down>  :echoe "use j"<cr>
 "inoremap <down>  <esc>:echoe "use j"<cr>
 
 "Disable highlight
-noremap <silent> <leader>h :noh<cr>
-"vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
+noremap 8 * 
+noremap * :nohlsearch<cr>
 
-"move between windows
-map <C-j> <C-W>j 
-map <C-k> <C-W>k 
-map <C-h> <C-W>h 
-map <C-l> <C-W>l 
+"change window size
+noremap <C-h> :vertical res -2<cr>
+noremap <C-l> :vertical res +2<cr>
+noremap <C-j> :res +2<cr>
+noremap <C-k> :res -2<cr>
 
-"remap go to screen top H bottom J
-nnoremap J L
-nnoremap K H
+""remap go to screen top H bottom J
+noremap J L
+noremap K H
 "remap go to linestart H lineend L
-nnoremap H 0
-nnoremap L $
+noremap H 0
+noremap L $
+"remap page up and down
+noremap F <C-d>
+noremap B <C-u>
+"remap redo
+noremap R <C-r>
+"quick toggle fold
+noremap  z za
 
-nmap dL d$a
-nmap dH d0a
 "let space be <leader>
 let mapleader=" " 
-"quick save and quick quit
-nmap <leader>w :w<cr> 
-nmap <leader>q :q<cr>
-"quick select section/all
-nmap <leader>ss {jV}
-nmap <leader>sa ggVG
-"quick move between windows
-nmap <leader>j <C-W>j
-"nmap <leader>k <C-W>k
-nmap <leader>l <C-W>l
-"nmap <leader>h <C-W>h
 
-nmap <leader>- :new<cr>
-nmap <leader>c :tabnew<cr>
-nmap <leader>n :tabnext<cr>
+"move between window
+noremap <leader>j <C-W>j<esc><esc>
+noremap <leader>k <C-W>k<esc><esc>
+noremap <leader>l <C-W>l<esc><esc>
+noremap <leader>h <C-W>h<esc><esc>
+"quick move between windows
+noremap <leader>- :split<cr>
+noremap <leader>_ :vsplit<cr>
+noremap <leader>c :tabnew<cr>
+noremap <leader>n :tabnext<cr>
+noremap <leader>p :tabprevious<cr>
+
+"quick save and quick quit
+noremap <C-s> :w<cr> 
+noremap <leader>w :w<cr> 
+noremap <leader>q :q<cr>
+noremap <leader>S :source ~/.vimrc<cr>
+""quick select section/all
+noremap<leader>ss {jV}
+noremap <leader>sa ggVG
+"zoom
+nmap <leader>z :call Zoom()<cr>
+
+"Plugins
+nmap <leader>t :TagbarToggle<CR>
+nmap <leader>T :NERDTree<CR>
+nmap f <Plug>(easymotion-s)
+nmap <leader>f <Plug>(easymotion-s2)
 
 "------------------------- Overwrite--------------------------------------------------
 
@@ -220,6 +266,9 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'yggdroot/indentline'
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'itchyny/vim-cursorword'
 "-------------file tree/search----
 Plug 'preservim/nerdtree'
 Plug 'majutsushi/tagbar'
@@ -228,20 +277,55 @@ Plug 'kien/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-surround'
 Plug 'scrooloose/nerdcommenter'
-"Plug 'valloric/youcompleteme'
+Plug 'valloric/youcompleteme'
 Plug 'tpope/vim-repeat'
+"Plug "terryma/vim-multiple-cursors'
+Plug 'jiangmiao/auto-pairs'
 "-------------coding support----
 Plug 'w0rp/ale'
 
 
 call plug#end()
 
+"gitgutter
 set updatetime=200 "quickly check 
+let g:gitgutter_map_keys = 0
+
+"airline
 let g:airline_section_c='%f %r %m %='
 let g:airline_section_x='type:%y'
 let g:airline_section_y='&encoding'
 let g:airline_section_z='%p%% L%l/%L:C%c'
 let g:airline_theme='molokai'
+
+"easymotion
+let g:EasyMotion_smartcase = 1
+
+"rainbow parentheses
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+"au Syntax * RainbowParenthesesLoadChevrons
+let g:rbpt_colorpairs = [
+    \ ['black',       'SeaGreen3'],
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+"
 "------------------------- Abbrivations--------------------------------------------------
 :iab abgCl -------------------------str--------------------------------------------------<esc>0fscw
 :iab abgCb //--------------------------------------------------------------------<enter>//str<enter>//--------------------------------------------------------------------<esc>0kfscw
@@ -278,3 +362,18 @@ function! StatuslineGit()
   let l:branchname = GitBranch()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
+
+function! Zoom ()
+"check if is the zoomed state (tabnumber > 1 && window == 1)
+  if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
+    let l:cur_winview = winsaveview()
+    let l:cur_bufname = bufname('')
+    tabclose
+    "restore the view
+    if l:cur_bufname == bufname('')
+      call winrestview(cur_winview)
+    endif
+  else
+    tab split
+  endif
+endfunction"
