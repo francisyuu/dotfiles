@@ -239,13 +239,13 @@ noremap <leader>S :source ~/.vimrc<cr>
 noremap<leader>ss {jV}
 noremap <leader>sa ggVG
 "zoom
-nmap <leader>z :call Zoom()<cr>
+map <leader>z :call Zoom()<cr>
 
 "Plugins
-nmap <leader>t :TagbarToggle<CR>
-nmap <leader>T :NERDTree<CR>
-nmap f <Plug>(easymotion-s)
-nmap <leader>f <Plug>(easymotion-s2)
+map <leader>t :TagbarToggle<CR>
+map <leader>T :NERDTree<CR>
+map f <Plug>(easymotion-s)
+map <leader>f <Plug>(easymotion-s2)
 
 "------------------------- Overwrite--------------------------------------------------
 
