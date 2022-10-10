@@ -109,10 +109,43 @@ source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting/zsh-
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias tm="tmux"
-alias sor="source"
 alias cdd="cd .."
 alias cddd="cd ~"
+
+alias g="git"
+alias gin="git init"
+alias ga="git a "
+alias gaa="git aa"
+alias gb="git b "
+alias gbd="git bd"
+alias gbl="git bl"
+alias gbll="git bll"
+alias gc="git c "
+alias gca="git ca"
+alias gcm="git cm"
+alias gcl="git cl"
+alias gck="git ck"
+alias gckb="git ckb"
+alias gd="git d "
+alias gf="git f "
+alias gl="git l "
+alias gla="git la "
+alias gm="git m "
+alias gp="git p "
+alias gpl="git pl"
+alias gre="git re"
+alias gs="git s "
+
+alias tm="tmux"
+alias tmn="tmux new -s"
+alias tma="tmux attach -t"
+alias tmk="tmux kill-session -t"
+alias tml="tmux ls"
+
+alias qm="qman"
+alias qmf="qman|grep"
+
+
 bindkey '\eh' backward-char
 bindkey '\el' forward-char
 bindkey '\ek' up-line-or-history

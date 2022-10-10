@@ -10,4 +10,24 @@
 [color]
 	ui = true
 [alias]
-	graph = log --all --graph --decorate --oneline
+  a = add
+  aa = add .
+  b = branch
+  bd = branch -d
+  bl = blame --date=relative
+  bll = blame --date=relative --porcelain
+  c = commit -m
+  ca = commit -m -a
+  cm = commit --amend
+  cl = clone
+  ck = checkout
+  ckb = checkout -b
+  d = diff
+  f = fetch
+	l = log --graph --decorate --oneline
+	la = log --all --graph --decorate --oneline
+  m = merge
+  p = push
+  pl = pull
+  re = remote
+  s = status
