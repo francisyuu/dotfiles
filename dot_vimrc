@@ -13,6 +13,7 @@
 "--Plugins
 "--Abbreviations
 "------------------------- General--------------------------------------------------
+set nocompatible
 
 " how many lines of :commands are remembered,default 20
 set history=500  
@@ -48,6 +49,7 @@ set noerrorbells visualbell t_vb=
 
 "auto change dir whenever you open a file
 set autochdir 
+
 
 "------------------------- Interface--------------------------------------------------
 colorscheme molokai 
@@ -126,7 +128,7 @@ set showmatch
 "show matching time 0.2second
 set matchtime=0
 "let the color of the matching paren seems more comfortable
-hi MatchParen ctermfg=208 ctermbg=bg
+hi MatchParen ctermfg=208 ctermbg=DarkGrey
 
 "Use spaces instead of tabs except Makefile
 set expandtab
@@ -150,14 +152,12 @@ filetype indent on
 "set omnifunc=syntaxcomplete#Complete
 "au BufNewFile,BufRead,BufEnter *.cpp,*.hpp set omnifunc=omni#cpp#complete#Main
 
-"------------------------- Ke"ymap-------------------------------------------------
+"------------------------- Keymap-------------------------------------------------
 " Unbind some useless/annoying default key bindings.
 "'Q' in normal mode enters Ex mode. You almost never want this.
 "nmap 0 <Nop>
 "nmap $ <Nop>
-noremap B <Nop>
 noremap E <Nop>
-noremap F <Nop>
 noremap Q <Nop>
 noremap Y <Nop>
 noremap Z <Nop>
@@ -166,15 +166,15 @@ noremap <C-c> <Nop>
 noremap <C-d> <Nop>
 noremap <C-e> <Nop>
 noremap <C-g> <Nop>
-noremap <C-i> <Nop>
+"noremap <C-i> <Nop>
 noremap <C-m> <Nop>
 noremap <C-n> <Nop>
-noremap <C-o> <Nop>
+"noremap <C-o> <Nop>
 noremap <C-q> <Nop>
 noremap <C-r> <Nop>
 noremap <C-t> <Nop>
 noremap <C-u> <Nop>
-noremap <C-w> <Nop>
+"noremap <C-w> <Nop>
 noremap <C-x> <Nop>
 noremap <C-y> <Nop>
 " Enable mouse support. You should avoid relying on this too much, but it can
@@ -215,6 +215,11 @@ noremap R <C-r>
 "quick toggle fold
 noremap  z za
 
+"set tags path, ./means work dir,";"means search up until finds tags
+"the second tags means find tags in current working dir
+set tags=./tags;,tags
+noremap } <C-W>]
+
 "let space be <leader>
 let mapleader=" " 
 
@@ -246,12 +251,14 @@ map <leader>t :TagbarToggle<CR>
 map <leader>T :NERDTree<CR>
 map f <Plug>(easymotion-s)
 map <leader>f <Plug>(easymotion-s2)
+map <leader>d :YcmCompleter GoTo<cr>
+map <leader>y <Plug>(YCMFindSymbolInWorkspace)
 
 "------------------------- Overwrite--------------------------------------------------
 
 "Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
+ "source /etc/vim/vimrc.local
 endif
 
 "------------------------- Plugins--------------------------------------------------
@@ -282,6 +289,7 @@ Plug 'tpope/vim-repeat'
 Plug 'jiangmiao/auto-pairs'
 "-------------coding support----
 Plug 'w0rp/ale'
+Plug 'instant-markdown/vim-instant-markdown',{'for':'markdown','do':'yarn install'}
 
 
 call plug#end()
@@ -291,7 +299,7 @@ set updatetime=200 "quickly check
 let g:gitgutter_map_keys = 0
 
 "airline
-let g:airline_section_c='%f %r %m %='
+let g:airline_section_c='%.40F %r %m %='
 let g:airline_section_x='type:%y'
 let g:airline_section_y='&encoding'
 let g:airline_section_z='%p%% L%l/%L:C%c'
@@ -307,72 +315,88 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 "au Syntax * RainbowParenthesesLoadChevrons
 let g:rbpt_colorpairs = [
-    \ ['black',       'SeaGreen3'],
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-"
+   \ ['black',       'SeaGreen3'],
+   \ ['brown',       'RoyalBlue3'],
+   \ ['Darkblue',    'SeaGreen3'],
+   \ ['darkgray',    'DarkOrchid3'],
+   \ ['darkgreen',   'firebrick3'],
+   \ ['darkcyan',    'RoyalBlue3'],
+   \ ['darkred',     'SeaGreen3'],
+   \ ['darkmagenta', 'DarkOrchid3'],
+   \ ['brown',       'firebrick3'],
+   \ ['gray',        'RoyalBlue3'],
+   \ ['darkmagenta', 'DarkOrchid3'],
+   \ ['Darkblue',    'firebrick3'],
+   \ ['darkgreen',   'RoyalBlue3'],
+   \ ['darkcyan',    'SeaGreen3'],
+   \ ['darkred',     'DarkOrchid3'],
+   \ ['red',         'firebrick3'],
+   \ ]
+
+"YouCompleteMe
+let g:ycm_global_ycm_extra_conf = "~/.vim/plugged/youcompleteme/.ycm_extra_conf.py"
+
+filetype plugin on
+"Uncomment to override defaults:
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_open_to_the_world = 1
+let g:instant_markdown_allow_unsafe_content = 1
+let g:instant_markdown_allow_external_content = 0
+let g:instant_markdown_mathjax = 1
+let g:instant_markdown_mermaid = 1
+let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
+let g:instant_markdown_autoscroll = 0
+let g:instant_markdown_port = 8888
+let g:instant_markdown_python = 1
 "------------------------- Abbrivations--------------------------------------------------
 :iab abgCl -------------------------str--------------------------------------------------<esc>0fscw
 :iab abgCb //--------------------------------------------------------------------<enter>//str<enter>//--------------------------------------------------------------------<esc>0kfscw
 "------------------------- Funcions--------------------------------------------------
 function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
+   let l:saved_reg = @"
+   execute "normal! vgvy"
 
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
+   let l:pattern = escape(@", "\\/.*'$^~[]")
+   let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'gv'
-        call CmdLine("Ack '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
+   if a:direction == 'gv'
+       call CmdLine("Ack '" . l:pattern . "' " )
+   elseif a:direction == 'replace'
+       call CmdLine("%s" . '/'. l:pattern . '/')
+   endif
 
-    let @/ = l:pattern
-    let @" = l:saved_reg
+   let @/ = l:pattern
+   let @" = l:saved_reg
 endfunction
 
 function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
+   if &paste
+       return 'PASTE MODE  '
+   endif
+   return ''
 endfunction
 
 function! GitBranch()
-  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+ return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
 endfunction
 
 function! StatuslineGit()
-  let l:branchname = GitBranch()
-  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+ let l:branchname = GitBranch()
+ return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
 endfunction
 
 function! Zoom ()
 "check if is the zoomed state (tabnumber > 1 && window == 1)
-  if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
-    let l:cur_winview = winsaveview()
-    let l:cur_bufname = bufname('')
-    tabclose
-    "restore the view
-    if l:cur_bufname == bufname('')
-      call winrestview(cur_winview)
-    endif
-  else
-    tab split
-  endif
+ if tabpagenr('$') > 1 && tabpagewinnr(tabpagenr(), '$') == 1
+   let l:cur_winview = winsaveview()
+   let l:cur_bufname = bufname('')
+   tabclose
+   "restore the view
+   if l:cur_bufname == bufname('')
+     call winrestview(cur_winview)
+   endif
+ else
+   tab split
+ endif
 endfunction"

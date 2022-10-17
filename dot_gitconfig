@@ -17,8 +17,9 @@
   bl = blame --date=relative
   bll = blame --date=relative --porcelain
   c = commit -m
-  ca = commit -m -a
+  ca = commit -a -m
   cm = commit --amend
+  cma = commit --amend -a
   cl = clone
   ck = checkout
   ckb = checkout -b

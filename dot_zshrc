@@ -4,8 +4,8 @@
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-source ~/etc/profile
-clear
+#source /etc/profile
+#clear
 
 # If you come from bash you might have to change your $PATH.
  export PATH=/usr/local/bin:$HOME/bin:$PATH
@@ -109,32 +109,34 @@ source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting/zsh-
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias sudo='sudo '
 alias cdd="cd .."
 alias cddd="cd ~"
 
 alias g="git"
 alias gin="git init"
-alias ga="git a "
-alias gaa="git aa"
-alias gb="git b "
-alias gbd="git bd"
-alias gbl="git bl"
-alias gbll="git bll"
-alias gc="git c "
-alias gca="git ca"
-alias gcm="git cm"
-alias gcl="git cl"
-alias gck="git ck"
-alias gckb="git ckb"
-alias gd="git d "
-alias gf="git f "
-alias gl="git l "
-alias gla="git la "
-alias gm="git m "
-alias gp="git p "
-alias gpl="git pl"
-alias gre="git re"
-alias gs="git s "
+alias ga="git add "
+alias gaa="git add ."
+alias gb="git branch "
+alias gbd="git branch -d"
+alias gbl="git blame --date=relative"
+alias gbll="git blame --date=relative --porcelain"
+alias gc="git commit -m "
+alias gca="git commit -a -m"
+alias gcm="git commit --amend"
+alias gcma="git commit --amend -a"
+alias gcl="git clone"
+alias gck="git checkout"
+alias gckb="git checkout -b"
+alias gd="git diff "
+alias gf="git fetch "
+alias gl="git log --graph --decorate --oneline "
+alias gla="git log --graph --decorate --oneline --all "
+alias gm="git merge "
+alias gp="git push "
+alias gpl="git pull"
+alias gre="git remote"
+alias gs="git status "
 
 alias tm="tmux"
 alias tmn="tmux new -s"
@@ -145,6 +147,19 @@ alias tml="tmux ls"
 alias qm="qman"
 alias qmf="qman|grep"
 
+alias ctag="ctags -R *"
+
+alias cnpm="npm --registry=https://registry.npmmirror.com \
+  --cache=$HOME/.npm/.cache/cnpm \
+  --disturl=https://npmmirror.com/mirrors/node \
+  --userconfig=$HOME/.cnpmrc"
+
+alias cmdhistory="history|awk '{print \$2}'|sort|uniq -c|sort -nk1,1"
+alias vimrc="vim ~/.vimrc"
+alias zshrc="vim ~/.zshrc"
+alias bashrc="vim ~/.bashrc"
+alias tmconf="vim ~/.tmux.conf"
+alias gitconf="vim ~/.gitconfig.conf"
 
 bindkey '\eh' backward-char
 bindkey '\el' forward-char
@@ -153,6 +168,10 @@ bindkey '\ej' down-line-or-history
 
 LS_COLORS="di=01;94"
 export LS_COLORS
+
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
