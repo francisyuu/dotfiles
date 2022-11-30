@@ -167,8 +167,6 @@ noremap <C-d> <Nop>
 noremap <C-e> <Nop>
 noremap <C-g> <Nop>
 "noremap <C-i> <Nop>
-noremap <C-m> <Nop>
-noremap <C-n> <Nop>
 "noremap <C-o> <Nop>
 noremap <C-q> <Nop>
 noremap <C-r> <Nop>
@@ -181,6 +179,7 @@ noremap <C-y> <Nop>
 " sometimes be convenient.
 set mouse+=a
 
+vnoremap y "+y
 "nnoremap <Left>  :echoe "Use h"<CR>
 "nnoremap <Right> :echoe "Use l"<CR>
 "nnoremap <Up>    :echoe "Use k"<CR>
@@ -210,11 +209,12 @@ noremap L $
 "remap page up and down
 noremap F <C-d>
 noremap B <C-u>
-"remap redo
-noremap R <C-r>
 "quick toggle fold
 noremap  z za
 
+"quick add/minus num
+noremap <C-m> <C-a>
+noremap <C-n> <C-x>
 "set tags path, ./means work dir,";"means search up until finds tags
 "the second tags means find tags in current working dir
 set tags=./tags;,tags
@@ -224,10 +224,11 @@ noremap } <C-W>]
 let mapleader=" " 
 
 "move between window
-noremap <leader>j <C-W>j<esc><esc>
-noremap <leader>k <C-W>k<esc><esc>
-noremap <leader>l <C-W>l<esc><esc>
-noremap <leader>h <C-W>h<esc><esc>
+noremap <leader>j <C-W>j<esc>
+noremap <leader>k <C-W>k<esc>
+noremap <leader>l <C-W>l<esc>
+noremap <leader>h <C-W>h<esc>
+
 "quick move between windows
 noremap <leader>- :split<cr>
 noremap <leader>_ :vsplit<cr>
@@ -350,8 +351,25 @@ let g:instant_markdown_autoscroll = 0
 let g:instant_markdown_port = 8888
 let g:instant_markdown_python = 1
 "------------------------- Abbrivations--------------------------------------------------
+
 :iab abgCl -------------------------str--------------------------------------------------<esc>0fscw
+
 :iab abgCb //--------------------------------------------------------------------<enter>//str<enter>//--------------------------------------------------------------------<esc>0kfscw
+
+:iab id ysyx_22050133_
+
+:iab r8 reg[7:0]
+:iab r16 reg[15:0]
+:iab r32 reg[31:0]
+:iab r64 reg[63:0]
+:iab w8 wire[7:0]
+:iab w16 wire[15:0]
+:iab w32 wire[31:0]
+:iab w64 wire[63:0]
+:iab l8 [7:0]
+:iab l16 [15:0]
+:iab l32 [31:0]
+:iab l64 [63:0]
 "------------------------- Funcions--------------------------------------------------
 function! VisualSelection(direction, extra_filter) range
    let l:saved_reg = @"

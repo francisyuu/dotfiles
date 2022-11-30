@@ -185,4 +185,5 @@ export PATH=$VERILATOR_ROOT/bin:$PATH
 export NEMU_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/nemu
 export AM_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/abstract-machine
 export NPC_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/npc
+export NAVY_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/navy-apps
 export NVBOARD_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/nvboard

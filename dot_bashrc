@@ -128,3 +128,4 @@ export NVBOARD_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/nvboa
 # Install Ruby Gems to ~/gems
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+export NAVY_HOME=/home/francisyuu/Documents/ysyx22050133/ysyx-workbench/navy-apps
